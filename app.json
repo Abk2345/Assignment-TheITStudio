@@ -24,10 +24,16 @@
       },
       "permissions": [
         "READ_EXTERNAL_STORAGE"
-      ]
+      ],
+      "package": "com.abhishant77777.TheITStudioAssign"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "26caafeb-a522-4460-b544-06387585942d"
+      }
     }
   }
 }

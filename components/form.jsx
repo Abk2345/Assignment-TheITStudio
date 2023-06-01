@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-import { StyleSheet, View, Text, Pressable } from "react-native";
+import { StyleSheet, ScrollView, Text, Pressable } from "react-native";
 import * as MailComposer from 'expo-mail-composer';
 
 import { TextInput } from "@react-native-material/core"
@@ -64,8 +64,8 @@ const Form = () => {
 
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.textstyle}>{toShowResult}</Text>
+    <ScrollView style={styles.container} contentContainerStyle={{ alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={styles.toShowMessage}>{toShowResult}</Text>
       <TextInput
         style={styles.textinput}
         label="Full Name"
@@ -75,12 +75,14 @@ const Form = () => {
       <TextInput
         style={styles.textinput}
         label="Phone Number"
+        keyboardType="phone-pad"
         value={phoneNumber}
         leading={props => <MaterialIcons name="call" {...props} />}
         onChangeText={setPhoneNumber} />
       <TextInput
         style={styles.textinput}
         label="Email Address"
+        keyboardType="email-address"
         value={email}
         leading={props => <MaterialIcons name="email" {...props} />}
         onChangeText={setEmail} />
@@ -95,18 +97,21 @@ const Form = () => {
       <Pressable
         style={styles.submitBtn}
         onPress={handleSubmitUsingDeviceApp}>
-        <Text style={styles.textstyle}>Submit</Text>
+        <Text style={styles.textstyle}>Submit with device app</Text>
       </Pressable>
-    </View>
+      <Pressable
+        style={styles.submitBtn}
+        onPress={handleSubmissionWithNodeMailer}>
+        <Text style={styles.textstyle}>Submit with nodemailer</Text>
+      </Pressable>
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#83829A',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#FAFAFC',
   },
   textinput: {
     backgroundColor: '#fff',
@@ -122,7 +127,7 @@ const styles = StyleSheet.create({
   submitBtn: {
     backgroundColor: 'white',
     alignItems: 'center',
-    width: "50%",
+    width: "80%",
     borderWidth: 2,
     padding: 5,
     margin: 20,
@@ -134,6 +139,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     padding: 5,
     color: '#312651',
+  },
+  toShowMessage: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    padding: 5,
+    color: '#312651',
+    marginTop: 40,
+
   }
 
 });
